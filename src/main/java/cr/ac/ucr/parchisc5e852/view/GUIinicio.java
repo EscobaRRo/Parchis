@@ -4,14 +4,15 @@
  */
 package cr.ac.ucr.parchisc5e852.view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Lenovo
  */
 public class GUIinicio extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUIinicio.class.getName());
-
+    
     /**
      * Creates new form GUIinicio
      */
@@ -27,48 +28,65 @@ public class GUIinicio extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
-        panelBotones = new cr.ac.ucr.parchisc5e852.view.PanelBotones();
-        panelDataPlayer = new cr.ac.ucr.parchisc5e852.view.PanelDataPlayer();
+        txtColorSeleccion = new javax.swing.JTextField();
+        btnJugar = new javax.swing.JButton();
+        btnInstrucciones = new javax.swing.JButton();
+        btnHistoria = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
+        btnCreditos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
-        getContentPane().add(panelDataPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 330));
+        getContentPane().add(txtColorSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 120, -1));
+
+        btnJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonJugar.png"))); // NOI18N
+        btnJugar.setText("Jugar");
+        btnJugar.setOpaque(true);
+        getContentPane().add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 80, 30));
+
+        btnInstrucciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonInstrucciones.png"))); // NOI18N
+        btnInstrucciones.setText("Instrucciones");
+        getContentPane().add(btnInstrucciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 80, 30));
+
+        btnHistoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonHistoria.png"))); // NOI18N
+        btnHistoria.setText("Historia");
+        getContentPane().add(btnHistoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 80, 30));
+
+        btnEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonEnviar.png"))); // NOI18N
+        btnEnviar.setText("Enviar");
+        getContentPane().add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 80, 30));
+
+        btnCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonCreditos.png"))); // NOI18N
+        btnCreditos.setText("Creditos");
+        getContentPane().add(btnCreditos, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 80, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Copia de Recurso 1.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[])
+    public void listen(ActionListener controller)
     {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GUIinicio().setVisible(true));
+        this.btnCreditos.addActionListener(controller);
+        this.btnEnviar.addActionListener(controller);
+        this.btnHistoria.addActionListener(controller);
+        this.btnInstrucciones.addActionListener(controller);
+        this.btnJugar.addActionListener(controller);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private cr.ac.ucr.parchisc5e852.view.PanelBotones panelBotones;
-    private cr.ac.ucr.parchisc5e852.view.PanelDataPlayer panelDataPlayer;
+    private javax.swing.JButton btnCreditos;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnHistoria;
+    private javax.swing.JButton btnInstrucciones;
+    private javax.swing.JButton btnJugar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtColorSeleccion;
     // End of variables declaration//GEN-END:variables
 }

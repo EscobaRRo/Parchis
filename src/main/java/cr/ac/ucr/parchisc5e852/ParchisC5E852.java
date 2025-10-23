@@ -4,6 +4,8 @@
 
 package cr.ac.ucr.parchisc5e852;
 
+import cr.ac.ucr.parchisc5e852.controller.ControllerMain;
+
 /**
  *
  * @author Lenovo
@@ -11,6 +13,6 @@ package cr.ac.ucr.parchisc5e852;
 public class ParchisC5E852 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new ControllerMain();
     }
 }

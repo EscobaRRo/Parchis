@@ -20,34 +20,47 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-              <Component id="btnJugar" min="-2" pref="85" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="btnHistoria" min="-2" pref="93" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnInstrucciones" min="-2" pref="112" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="btnJugar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnHistoria" min="-2" pref="202" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCreditos" min="-2" pref="94" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnInstrucciones" min="-2" pref="182" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnCreditos" min="-2" pref="200" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <EmptySpace pref="81" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="142" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCreditos" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="btnInstrucciones" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="btnHistoria" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="btnJugar" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnHistoria" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Component id="btnJugar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="btnEnviar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnInstrucciones" min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="btnCreditos" min="-2" pref="83" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <EmptySpace pref="166" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,8 +68,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnHistoria">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Historia"/>
-        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/botonesMenu/BotonHistoria.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistoriaActionPerformed"/>
@@ -64,26 +78,40 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnInstrucciones">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Instrucciones"/>
-        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/botonesMenu/BotonInstrucciones.png"/>
+        </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInstruccionesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCreditos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cr&#xe9;ditos"/>
-        <Property name="opaque" type="boolean" value="false"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/botonesMenu/BotonCreditos.png"/>
+        </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreditosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnJugar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Jugar"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/botonesMenu/BotonJugar.png"/>
+        </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJugarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEnviar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enviar"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/botonesMenu/BotonEnviar.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnviarActionPerformed"/>

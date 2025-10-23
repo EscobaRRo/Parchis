@@ -35,8 +35,7 @@ public class PanelBotones extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         btnHistoria = new javax.swing.JButton();
         btnInstrucciones = new javax.swing.JButton();
@@ -46,31 +45,38 @@ public class PanelBotones extends javax.swing.JPanel {
 
         setOpaque(false);
 
-        btnHistoria.setText("Historia");
-        btnHistoria.setOpaque(false);
-        btnHistoria.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHistoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonHistoria.png"))); // NOI18N
+        btnHistoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoriaActionPerformed(evt);
             }
         });
 
-        btnInstrucciones.setText("Instrucciones");
-        btnInstrucciones.setOpaque(false);
+        btnInstrucciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonInstrucciones.png"))); // NOI18N
+        btnInstrucciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInstruccionesActionPerformed(evt);
+            }
+        });
 
-        btnCreditos.setText("Créditos");
-        btnCreditos.setOpaque(false);
+        btnCreditos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonCreditos.png"))); // NOI18N
+        btnCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreditosActionPerformed(evt);
+            }
+        });
 
-        btnJugar.setText("Jugar");
+        btnJugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonJugar.png"))); // NOI18N
         btnJugar.setToolTipText("");
-        btnJugar.setOpaque(false);
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
 
-        btnEnviar.setText("Enviar");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonesMenu/BotonEnviar.png"))); // NOI18N
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
             }
         });
@@ -80,30 +86,37 @@ public class PanelBotones extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnInstrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
+                .addComponent(btnJugar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEnviar)
-                    .addComponent(btnCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(129, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(btnEnviar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInstrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(btnEnviar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnInstrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEnviar)
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnInstrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -116,6 +129,18 @@ public class PanelBotones extends javax.swing.JPanel {
     {//GEN-HEADEREND:event_btnEnviarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnCreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCreditosActionPerformed
+
+    private void btnInstruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstruccionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInstruccionesActionPerformed
+
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnJugarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
