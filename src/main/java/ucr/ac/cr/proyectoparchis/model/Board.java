@@ -25,39 +25,39 @@ public class Board {
     {
         this.squares=new Square[69];
         this.positions=new Position[69];
-        if(colorUno.equalsIgnoreCase("Rojo"))//en caso de que se elija rojo, se le asigna al cPU el color amarillo
-        {
-            this.homeRed=new Home(colorUno);//rojo
-            this.homeYellow=new Home(colorDos);//amarillo
-        }//if 1
-        else
-        {
-            if(colorUno.equalsIgnoreCase("Amarillo"))//en caso de que se elija amarillo, se le asigna al cPU el color rojo
-            {
-                this.homeYellow=new Home(colorUno);//amarillo
-                this.homeRed=new Home(colorDos);//rojo
-            }//if 2
-            else
-            {
-                if(colorUno.equalsIgnoreCase("Azul"))//en caso de que se elija el color azul, se le asigna al cPU el color verde
-                {
-                    this.homeBlue=new Home(colorUno);//azul
-                    this.homeGreen=new Home(colorDos);//verde
-                }//if 3
-                else
-                {//en caso de que se elija el color verde, se le asigna al color azul al cPU
-                    this.homeGreen=new Home(colorUno);//color verde
-                    this.homeBlue=new Home(colorDos);//color azul
-                }
-            }//else 2
-        }//else 1
+//        if(colorUno.equalsIgnoreCase("Rojo"))//en caso de que se elija rojo, se le asigna al cPU el color amarillo
+//        {
+//            this.homeRed=new Home(colorUno);//rojo
+//            this.homeYellow=new Home(colorDos);//amarillo
+//        }//if 1
+//        else
+//        {
+//            if(colorUno.equalsIgnoreCase("Amarillo"))//en caso de que se elija amarillo, se le asigna al cPU el color rojo
+//            {
+//                this.homeYellow=new Home(colorUno);//amarillo
+//                this.homeRed=new Home(colorDos);//rojo
+//            }//if 2
+//            else
+//            {
+//                if(colorUno.equalsIgnoreCase("Azul"))//en caso de que se elija el color azul, se le asigna al cPU el color verde
+//                {
+//                    this.homeBlue=new Home(colorUno);//azul
+//                    this.homeGreen=new Home(colorDos);//verde
+//                }//if 3
+//                else
+//                {//en caso de que se elija el color verde, se le asigna al color azul al cPU
+//                    this.homeGreen=new Home(colorUno);//color verde
+//                    this.homeBlue=new Home(colorDos);//color azul
+//                }
+//            }//else 2
+//        }//else 1
         
         this.homeYellow=new Home("Amarillo");//se crea un objeto tipo Home que es la parte que administra la casa amarilla
         this.homeRed=new Home("Rojo");//se crea un objeto tipo Home que es la parte que administra la casa roja
         this.homeBlue=new Home("Azul");//se crea un objeto tipo Home que es la parte que administra la casa azul
         this.homeGreen=new Home("verde");//se crea un objeto tipo Home que es la parte que administra la casa verde
         setPositions();//crea casillas del tablero
-        quadrants();//crea las piezas dentro de las casas
+        quadrants(colorUno, colorDos);//crea las piezas dentro de las casas
     }
     
     public void draw(Component c, Graphics g)
@@ -218,33 +218,74 @@ public class Board {
         
     }
     
-    public void quadrants()
+    public void quadrants(String colorUno, String colorDos)
     {//este es el metodo que da el error
-        homeYellow.setPiece(0, new Piece(new Position(518, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo derecha
-        homeYellow.setPiece(1, new Piece(new Position(423, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo izq
-        homeYellow.setPiece(2, new Piece(new Position(423, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba izq
-        homeYellow.setPiece(3, new Piece(new Position(518, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba derecha
-        //Rojo
-        homeRed.setPiece(0, new Piece(new Position(122, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo derecha
-        homeRed.setPiece(1, new Piece(new Position(32, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo izq DUPLICADO
-        homeRed.setPiece(2, new Piece(new Position(32, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba izq DUPLICADO
-        homeRed.setPiece(3, new Piece(new Position(122, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba derecha
+        if(colorUno.equalsIgnoreCase("Rojo"))
+        {
+            //rojo
+            homeRed.setPiece(0, new Piece(new Position(122, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo derecha
+            homeRed.setPiece(1, new Piece(new Position(32, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo izq DUPLICADO
+            homeRed.setPiece(2, new Piece(new Position(32, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba izq DUPLICADO
+            homeRed.setPiece(3, new Piece(new Position(122, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba derecha
+            //amarillo
+            homeYellow.setPiece(0, new Piece(new Position(518, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo derecha
+            homeYellow.setPiece(1, new Piece(new Position(423, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo izq
+            homeYellow.setPiece(2, new Piece(new Position(423, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba izq
+            homeYellow.setPiece(3, new Piece(new Position(518, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba derecha
+        }
+        else
+        {
+            if(colorUno.equalsIgnoreCase("Amarillo"))
+            {
+               //rojo
+                homeRed.setPiece(0, new Piece(new Position(122, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo derecha
+                homeRed.setPiece(1, new Piece(new Position(32, 223), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//abajo izq DUPLICADO
+                homeRed.setPiece(2, new Piece(new Position(32, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba izq DUPLICADO
+                homeRed.setPiece(3, new Piece(new Position(122, 145), new ImageIcon("./src/main/resources/imagenes/piecered.png")));//arriba derecha
+                //amarillo
+                homeYellow.setPiece(0, new Piece(new Position(518, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo derecha
+                homeYellow.setPiece(1, new Piece(new Position(423, 596), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//abajo izq
+                homeYellow.setPiece(2, new Piece(new Position(423, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba izq
+                homeYellow.setPiece(3, new Piece(new Position(518, 522), new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//arriba derecha
 
-        //Green
-        homeGreen.setPiece(0, new Piece(new Position(136, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba izq DUPLICADO
-        homeGreen.setPiece(1, new Piece(new Position(13, 592), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo izq DUPLICADO
-        homeGreen.setPiece(2, new Piece(new Position(13, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba derecha
-        homeGreen.setPiece(3, new Piece(new Position(134, 597), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo derecha
-        //Blue 
-        homeBlue.setPiece(0, new Piece(new Position(517, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo derecha
-        homeBlue.setPiece(1, new Piece(new Position(432, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo izq
-        homeBlue.setPiece(2, new Piece(new Position(432, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba izq
-        homeBlue.setPiece(3, new Piece(new Position(517, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba derecha
+            }
+            else
+            {
+                if(colorUno.equalsIgnoreCase("Azul"))
+                {
+                    //green
+                    homeGreen.setPiece(0, new Piece(new Position(136, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba izq DUPLICADO
+                    homeGreen.setPiece(1, new Piece(new Position(13, 592), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo izq DUPLICADO
+                    homeGreen.setPiece(2, new Piece(new Position(13, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba derecha
+                    homeGreen.setPiece(3, new Piece(new Position(134, 597), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo derecha
+                    //Blue 
+                    homeBlue.setPiece(0, new Piece(new Position(517, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo derecha
+                    homeBlue.setPiece(1, new Piece(new Position(432, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo izq
+                    homeBlue.setPiece(2, new Piece(new Position(432, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba izq
+                    homeBlue.setPiece(3, new Piece(new Position(517, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba derecha
+                }
+                else
+                {
+                    //green
+                    homeGreen.setPiece(0, new Piece(new Position(136, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba izq DUPLICADO
+                    homeGreen.setPiece(1, new Piece(new Position(13, 592), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo izq DUPLICADO
+                    homeGreen.setPiece(2, new Piece(new Position(13, 521), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//arriba derecha
+                    homeGreen.setPiece(3, new Piece(new Position(134, 597), new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//abajo derecha
+                    //Blue 
+                    homeBlue.setPiece(0, new Piece(new Position(517, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo derecha
+                    homeBlue.setPiece(1, new Piece(new Position(432, 220), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//abajo izq
+                    homeBlue.setPiece(2, new Piece(new Position(432, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba izq
+                    homeBlue.setPiece(3, new Piece(new Position(517, 117), new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));//arriba derecha
+                }
+            }
+        }
+
+        
 
     }
     
-    public void start()
-    {
-        quadrants();
-    }
+//    public void start()
+//    {
+//        quadrants();
+//    }
 }
