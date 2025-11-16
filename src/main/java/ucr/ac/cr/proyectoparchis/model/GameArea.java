@@ -13,9 +13,9 @@ public class GameArea {
     private Player playerOne;
     private Player playerTwo;
     
-    public GameArea(String colorUsuario, String colorCpu)
+    public GameArea(String colorUsuario)
     {
-        this.board=new Board(colorUsuario, colorCpu);
+        this.board=new Board(colorUsuario);
     }
     
     public Board getBoard()

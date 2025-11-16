@@ -6,6 +6,7 @@ package ucr.ac.cr.proyectoparchis.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import ucr.ac.cr.proyectoparchis.view.PrincipalMenu;
 import ucr.ac.cr.proyectoparchis.view.VentanaCreditos;
 import ucr.ac.cr.proyectoparchis.view.VentanaDeHistoria;
@@ -31,8 +32,7 @@ public class MenuController implements ActionListener{
         menuPrincipal=new PrincipalMenu();
         ventanaSeleccion=new VentanaDeSeleccionDeColor();
         String colorUno=ventanaSeleccion.getColorSeleccionado();
-        String colorDos=ventanaSeleccion.getColorCPU();
-        gameController=new GameController(ventanaSeleccion, colorUno,colorDos);//le manda por parametros al gameController la ventana de seleccionDeColor para que le mande los nombres mediante los metodos que se crearon en la clase.
+        //gameController=new GameController(ventanaSeleccion, colorUno);//le manda por parametros al gameController la ventana de seleccionDeColor para que le mande los nombres mediante los metodos que se crearon en la clase.
         ventanaSeleccion.listen(this);
         menuPrincipal.listen(this);
 //        ventanaInstrucciones.listen(this);
@@ -47,8 +47,19 @@ public class MenuController implements ActionListener{
         switch(e.getActionCommand())
         {
             case "Enviar"://enviar informacion (nombres y color seleccionado)
-                ventanaSeleccion.getColorSeleccionado();//para obtener el color seleccionado para la persona que lo va a manejar de la ventana de seleccion de color.
-                gameController.crearJugadores();//para crear los jugadores
+                //obtener nombres
+                String nombreJugador=ventanaSeleccion.getNombreJugador();
+                String nombreCPU=ventanaSeleccion.getNombreCPU();
+                //obtener color
+                String colorUno=ventanaSeleccion.getColorSeleccionado();
+                if(colorUno==null)
+                {
+                    JOptionPane.showInputDialog("Seleccione un color");
+                    break;
+                }
+                gameController=new GameController(ventanaSeleccion, colorUno);//mandamos ventanaDeseleccion y colorUno
+                
+                gameController.crearJugadores(nombreJugador, nombreCPU);
                 gameController.guiGame.setVisible(true);//hacer visible el tablero de parchis
             break;
             

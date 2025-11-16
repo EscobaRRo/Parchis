@@ -35,13 +35,15 @@ public class GameController implements ActionListener, MouseListener{
     private Dado dado;
     private GestionTurnos gestionTurnos;
     private VentanaDeSeleccionDeColor seleccionColor;
+    private String colorJugador;
     
     
-    public GameController(VentanaDeSeleccionDeColor seleccionColor, String colorUno, String colorDos)//recibe por parametros la ventana seleccion de color, porque los datos de nombres y colores se encuentran en la ventanaDeSeleccion del otro controlador
+    public GameController(VentanaDeSeleccionDeColor seleccionColor,String colorUno)//recibe por parametros la ventana seleccion de color, porque los datos de nombres y colores se encuentran en la ventanaDeSeleccion del otro controlador
     {
         this.seleccionColor=seleccionColor;//se le asigna a la variable de esta clase la ventana de la clase del GameController porque si se crea una nueva, no se guardan los datos ingresados
+        this.gameArea=new GameArea(colorUno);
         this.dado=new Dado();
-        this.gameArea=new GameArea(colorUno, colorDos);
+        this.colorJugador=colorUno;
 //        this.controlPanel=new ControlPanel();
 //        this.boardPanel=new BoardPanel();
         this.gestionTurnos=new GestionTurnos();
@@ -51,6 +53,7 @@ public class GameController implements ActionListener, MouseListener{
         //piece= new Piece(new Position(400, 400), new ImageIcon("./src/main/resources/imagenes/"))
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand())
@@ -59,6 +62,9 @@ public class GameController implements ActionListener, MouseListener{
                 System.out.println("Dado");//Muestra un mensaje de dado
                 Jugador actual=gestionTurnos.getJugadorActual();//esta variable tiene la posicion del jugador que esta siendo usado en el array
                 int valor=dado.getRandomNumber();//se le asigna a una variable el valor del dado.
+                board.setValorFicha(valor);
+                board.fichas(colorJugador);
+                guiGame.repaint();
                 System.out.println(actual.getNombre()+"tiró el dado: "+valor);//Se muestra el que hizo el turno y el valor del dado
                 actual.realizarJugada();//se realiza la jugada
                 gestionTurnos.pasarTurno();// metodo que hace que se pase el turno a la siguiente persona
@@ -113,10 +119,10 @@ public class GameController implements ActionListener, MouseListener{
         
     }
     
-    public void crearJugadores()
+    public void crearJugadores(String nombreJugador, String nombreCPU)
     {
-        Jugador jugador=new Jugador(seleccionColor.getNombreJugador());//crea un jugador y de la ventana seleccionColor le asigna el nombre.
-        Jugador cPU=new Jugador(seleccionColor.getNombreCPU());//crea el cPU y de la ventana seleccionColor le asigna el nombre.
+        Jugador jugador=new Jugador(nombreJugador);//crea un jugador y de la ventana seleccionColor le asigna el nombre.
+        Jugador cPU=new Jugador(nombreCPU);//crea el cPU y de la ventana seleccionColor le asigna el nombre.
         gestionTurnos.agregarJugador(jugador);//en el metodo agregar por parametro se recibe un jugador. Se le suma el jugadorUno al arrayList mediante este metodo.
         gestionTurnos.agregarJugador(cPU);//en el metodo agregar por parametro se recibe un jugador. Se le suma el cPU al arrayList mediante este metodo.
         //es el metodo para crear los jugadores
@@ -125,6 +131,11 @@ public class GameController implements ActionListener, MouseListener{
     public void setBoardPanel(BoardPanel panel)
     {
         this.boardPanel=panel;
+    }
+    
+    public Dado getDado()
+    {
+        return this.dado;
     }
     
 }

@@ -29,38 +29,38 @@ public class VentanaDeSeleccionDeColor extends javax.swing.JFrame {
     
     public String getColorSeleccionado()
     {
-        return this.txtSeleccionColor.getText();//obtener el color seleccionado
+        return (String)seleccionColor.getSelectedItem();//obtener el color seleccionado
     }
     
-    public String getColorCPU()
-    {
-        String color=getColorSeleccionado();
-        if(color.equalsIgnoreCase("Rojo"))//en caso de que sea rojo el color que se eligio, se le asigna amarillo al cPU
-        {
-            return "Amarillo";
-        }
-        else
-        {
-            if(color.equalsIgnoreCase("Amarillo"))//en caso de que sea amarillo el que se eligio, se le asigna rojo al cPU
-            {
-                return "Rojo";
-            }
-            else
-            {
-                if(color.equalsIgnoreCase("Azul"))//en caso de que sea azul el que se eligio, se le asigna verde al cPU
-                {
-                    return "Verde";
-                }
-                else
-                {
-                    
-                        return "Azul";//en caso de que verde el que se eligio, se le asigna azul al cPU
-
-                }
-            }
-                   
-        }
-    }
+//    public String getColorCPU()
+//    {
+//        String color=getColorSeleccionado();
+//        if(color.equalsIgnoreCase("Rojo"))//en caso de que sea rojo el color que se eligio, se le asigna amarillo al cPU
+//        {
+//            return "Amarillo";
+//        }
+//        else
+//        {
+//            if(color.equalsIgnoreCase("Amarillo"))//en caso de que sea amarillo el que se eligio, se le asigna rojo al cPU
+//            {
+//                return "Rojo";
+//            }
+//            else
+//            {
+//                if(color.equalsIgnoreCase("Azul"))//en caso de que sea azul el que se eligio, se le asigna verde al cPU
+//                {
+//                    return "Verde";
+//                }
+//                else
+//                {
+//                    
+//                        return "Azul";//en caso de que verde el que se eligio, se le asigna azul al cPU
+//
+//                }
+//            }
+//                   
+//        }
+//    }
     
     public String getNombreJugador()
     {
@@ -80,7 +80,7 @@ public class VentanaDeSeleccionDeColor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtSeleccionColor = new javax.swing.JTextField();
+        seleccionColor = new javax.swing.JComboBox<>();
         lblSeleccionColor = new javax.swing.JLabel();
         btnEnviar = new javax.swing.JButton();
         lblNombreCPU = new javax.swing.JLabel();
@@ -93,12 +93,8 @@ public class VentanaDeSeleccionDeColor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtSeleccionColor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSeleccionColorActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtSeleccionColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 90, 20));
+        seleccionColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarillo", "Azul", "Rojo", "Verde" }));
+        getContentPane().add(seleccionColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
 
         lblSeleccionColor.setForeground(new java.awt.Color(0, 0, 0));
         lblSeleccionColor.setText("Seleccion el color: ");
@@ -124,10 +120,6 @@ public class VentanaDeSeleccionDeColor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtSeleccionColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeleccionColorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSeleccionColorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,8 +153,8 @@ public class VentanaDeSeleccionDeColor extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreCPU;
     private javax.swing.JLabel lblNombreJugador;
     private javax.swing.JLabel lblSeleccionColor;
+    private javax.swing.JComboBox<String> seleccionColor;
     private javax.swing.JTextField txtNombreCPU;
     private javax.swing.JTextField txtNombreJugador1;
-    private javax.swing.JTextField txtSeleccionColor;
     // End of variables declaration//GEN-END:variables
 }
