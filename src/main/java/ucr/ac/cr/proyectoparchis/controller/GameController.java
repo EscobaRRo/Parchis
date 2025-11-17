@@ -62,11 +62,12 @@ public class GameController implements ActionListener, MouseListener{
                 System.out.println("Dado");//Muestra un mensaje de dado
                 Jugador actual=gestionTurnos.getJugadorActual();//esta variable tiene la posicion del jugador que esta siendo usado en el array
                 int valor=dado.getRandomNumber();//se le asigna a una variable el valor del dado.
-                board.setValorFicha(valor);
-                board.fichas(colorJugador);
-                guiGame.repaint();
+                board.setValorFicha(valor);//se le manda el valor que obtuvo el dado
+                board.fichas(colorJugador);//se le manda al metodo fichas el color del jugador ?
+                guiGame.repaint();//repaint
                 System.out.println(actual.getNombre()+"tiró el dado: "+valor);//Se muestra el que hizo el turno y el valor del dado
-                actual.realizarJugada();//se realiza la jugada
+                actual.realizarJugada();
+                    //se realiza la jugada
                 gestionTurnos.pasarTurno();// metodo que hace que se pase el turno a la siguiente persona
                 System.out.println("Siguiente turno" +gestionTurnos.getJugadorActual().getNombre());//se muestra el siguiente jugador
             break;

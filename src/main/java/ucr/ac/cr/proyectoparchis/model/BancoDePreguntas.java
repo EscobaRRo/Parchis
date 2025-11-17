@@ -30,6 +30,28 @@ public class BancoDePreguntas {
         bancoDePreguntasFacil[9]="El volante se usa para controlar los limpiaparabrisas";//no
     }
     
+    public int getRandomNumber()
+    {
+        return (int)(Math.random()*(15-1+1))+1;
+    }
+    
+    public String getPregunta()//metodo para obtener preguntas
+    {
+        llenarArray();//se llena el array de las preguntas
+        String pregunta="";//variable que va a ensenar las preguntas
+        pregunta=bancoDePreguntasFacil[getRandomNumber()];//se le asigna la pregunta
+        return pregunta;//manda la pregunta
+    }
+    
+    public boolean validarRespuesta(String respuesta)//metodo para validar respuesta
+    {
+        if(respuesta.equalsIgnoreCase("Falso"))
+        {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }
