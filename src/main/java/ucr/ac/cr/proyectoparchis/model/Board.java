@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
  *
  * @author jeanmarco
  */
+
 public class Board {
+    ;//esto controla si la ficha ya salió
     private Square[] squares;
     private Home homeYellow;
     private Home homeRed;
@@ -26,8 +28,17 @@ public class Board {
     private int posicionActualAzul=0;//es el indice que determina en que posicion se encuentra o se dibuja la pieza azul
     private int posicionActualVerde=0;//es el indice que determina en que posicion se encuentra o se dibuja la pieza verde
     private Position[] positions;//array de posiciones
+    private boolean fichaRojaEnCasa = true;
+    private boolean fichaAzulEnCasa = true;
+    private boolean fichaAmarillaEnCasa = true;
+    private boolean fichaVerdeEnCasa = true;
+    private boolean fichaRojaSalio = false;
+    private boolean fichaAmarillaSalio = false;
+    private boolean fichaAzulSalio = false;
+    private boolean fichaVerdeSalio = false;
 
-    public Board(String colorUno)//color que selecciona el jugador
+
+    public Board(String colorUno, double puntaje)//color que selecciona el jugador
     {
         this.banco=new BancoDePreguntas();
         //this.bancoEspeciales=new BancoDePreguntasEspeciales();
@@ -57,7 +68,7 @@ public class Board {
         
         
         quadrants(colorUno);//crea las piezas dentro de las casas, se le manda el color para que decida cuales se casas se crean
-        fichas(colorUno);//aqui ocurre toda la logistica, lo de las preguntas, el movimiento de las fichas, es como un controlador dentro de esta clase/ color que elige la persona
+        //fichas(colorUno, puntaje);//aqui ocurre toda la logistica, lo de las preguntas, el movimiento de las fichas, es como un controlador dentro de esta clase/ color que elige la persona
     }
     
     public void draw(Component c, Graphics g)
@@ -482,45 +493,263 @@ public class Board {
         this.ultimoValor=valor;
     }
     
-    public void fichas(String colorUno)//este es el metodo importante, es el controlador dentro de board=movimiento de fichas según color y preguntas(hasta el momento = 16/11/25)
+    public void fichas(String colorUno, double puntaje)//este es el metodo importante, es el controlador dentro de board=movimiento de fichas según color y preguntas(hasta el momento = 16/11/25)
     {//mover fichas segun color
-        switch(colorUno)
-        { 
-            case "Rojo"://en caso de que elija rojo
-            if(ultimoValor>=5)//solo se mueve si el valor es mayor a 5, no deberia ser asi.
-            {
-                //moverFichaRoja(ultimoValor);
-                moverFichaRoja(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
-                String respuesta=JOptionPane.showInputDialog(this.banco.getPregunta());//se le muestra la pregunta a la persona y se guarda la respuesta en la variable respuesta. 
-                this.banco.validarRespuesta(respuesta);//se le manda la respuesta al metodo que valida la respuesta
+        switch (colorUno) {
+        case "Rojo":
+            if (!fichaRojaSalio) {
+                if (ultimoValor >= 5) {
+                    sacarFicha("Rojo"); // Reutiliza tu método
+                    System.out.println("Ficha roja salió al tablero");
+                } else {
+                    System.out.println("Necesitas un 5 o más para sacar la ficha roja");
+                }
+            } else {
+                moverFichaRoja(ultimoValor);
+                String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+                boolean valida = this.banco.validarRespuesta(respuesta);
+                if (valida) sumarPuntaje(puntaje);
+                else restarPuntaje(puntaje);
             }
             break;
-                
-            case "Amarillo":
-                //amarillo
-                moverFichaAmarilla(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
-                String respuestaAmarilla=JOptionPane.showInputDialog(this.banco.getPregunta());
-                
-                //rojas
-                
+
+        case "Amarillo":
+            if (!fichaAmarillaSalio) {
+                if (ultimoValor >= 5) {
+                    sacarFicha("Amarillo");
+                    System.out.println("Ficha amarilla salió al tablero");
+                } else {
+                    System.out.println("Necesitas un 5 o más para sacar la ficha amarilla");
+                }
+            } else {
+                moverFichaAmarilla(ultimoValor);
+                String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+                boolean valida = this.banco.validarRespuesta(respuesta);
+                if (valida) sumarPuntaje(puntaje);
+                else restarPuntaje(puntaje);
+            }
             break;
-            case "Azul":
-                //Blue 
-                moverFichaAzul(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
-                String respuestaAzul=JOptionPane.showInputDialog(this.banco.getPregunta());
-                    //verdes
-                    
-                break;
-                
-            case "Verde":
-                    //green
-                moverFichaVerde(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
-                String respuestaVerde=JOptionPane.showInputDialog(this.banco.getPregunta());
-                    //Blue 
-                    
+
+        case "Azul":
+            if (!fichaAzulSalio) {
+                if (ultimoValor >= 5) {
+                    sacarFicha("Azul");
+                    System.out.println("Ficha azul salió al tablero");
+                } else {
+                    System.out.println("Necesitas un 5 o más para sacar la ficha azul");
+                }
+            } else {
+                moverFichaAzul(ultimoValor);
+                String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+                boolean valida = this.banco.validarRespuesta(respuesta);
+                if (valida) sumarPuntaje(puntaje);
+                else restarPuntaje(puntaje);
+            }
             break;
-        }
+
+        case "Verde":
+            if (!fichaVerdeSalio) {
+                if (ultimoValor >= 5) {
+                    sacarFicha("Verde");
+                    System.out.println("Ficha verde salió al tablero");
+                } else {
+                    System.out.println("Necesitas un 5 o más para sacar la ficha verde");
+                }
+            } else {
+                moverFichaVerde(ultimoValor);
+                String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+                boolean valida = this.banco.validarRespuesta(respuesta);
+                if (valida) sumarPuntaje(puntaje);
+                else restarPuntaje(puntaje);
+            }
+            break;
     }
+    }
+//        switch (colorUno) {
+//            case "Rojo":
+//                if (!fichaRojaSalio) {//si la ficha roja salio es false.
+//                    if (ultimoValor >= 5) {
+//                        // Saca la ficha por primera vez
+////                        fichaRojaSalio = true;
+//                        sacarFicha("Rojo");
+//                        System.out.println("Ficha roja salió al tablero");
+//                        else
+//                        {
+//                            System.out.println("Necesitas un 5");
+//                        }
+//                        posicionActualRoja = 0; // o la posición de salida
+//                        squares[posicionActualRoja] = new Square(positions[posicionActualRoja]);
+//                        squares[posicionActualRoja].setPiece(
+//                            new Piece(positions[posicionActualRoja], new ImageIcon("./src/main/resources/imagenes/piecered.png"))
+//                        );
+//                        
+//                    } else {
+//                        System.out.println("Necesitas un 5 o más para sacar la ficha roja");
+//                    }
+//                } else {
+//                    // La ficha ya salió, se mueve y se hace la pregunta
+//                    moverFichaRoja(ultimoValor);
+//                    String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+//                    boolean valida = this.banco.validarRespuesta(respuesta);
+//                    if (valida) sumarPuntaje(puntaje);
+//                    else restarPuntaje(puntaje);
+//                }
+//                break;
+//
+//            case "Amarillo":
+//                if (!fichaAmarillaSalio) {
+//                    if (ultimoValor >= 5) {
+//                        fichaAmarillaSalio = true;
+//                        posicionActualAmarillo = 0;
+//                        squares[posicionActualAmarillo] = new Square(positions[posicionActualAmarillo]);
+//                        squares[posicionActualAmarillo].setPiece(
+//                            new Piece(positions[posicionActualAmarillo], new ImageIcon("./src/main/resources/imagenes/pieceyellow.png"))
+//                        );
+//                        System.out.println("Ficha amarilla salió al tablero");
+//                    } else {
+//                        System.out.println("Necesitas un 5 o más para sacar la ficha amarilla");
+//                    }
+//                } else {
+//                    moverFichaAmarilla(ultimoValor);
+//                    String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+//                    boolean valida = this.banco.validarRespuesta(respuesta);
+//                    if (valida) sumarPuntaje(puntaje);
+//                    else restarPuntaje(puntaje);
+//                }
+//                break;
+//
+//            case "Azul":
+//                if (!fichaAzulSalio) {
+//                    if (ultimoValor >= 5) {
+//                        fichaAzulSalio = true;
+//                        posicionActualAzul = 0;
+//                        squares[posicionActualAzul] = new Square(positions[posicionActualAzul]);
+//                        squares[posicionActualAzul].setPiece(
+//                            new Piece(positions[posicionActualAzul], new ImageIcon("./src/main/resources/imagenes/pieceblue.png"))
+//                        );
+//                        System.out.println("Ficha azul salió al tablero");
+//                    } else {
+//                        System.out.println("Necesitas un 5 o más para sacar la ficha azul");
+//                    }
+//                } else {
+//                    moverFichaAzul(ultimoValor);
+//                    String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+//                    boolean valida = this.banco.validarRespuesta(respuesta);
+//                    if (valida) sumarPuntaje(puntaje);
+//                    else restarPuntaje(puntaje);
+//                }
+//                break;
+//
+//            case "Verde":
+//                if (!fichaVerdeSalio) {
+//                    if (ultimoValor >= 5) {
+//                        fichaVerdeSalio = true;
+//                        posicionActualVerde = 0;
+//                        squares[posicionActualVerde] = new Square(positions[posicionActualVerde]);
+//                        squares[posicionActualVerde].setPiece(
+//                            new Piece(positions[posicionActualVerde], new ImageIcon("./src/main/resources/imagenes/piecegreen.png"))
+//                        );
+//                        System.out.println("Ficha verde salió al tablero");
+//                    } else {
+//                        System.out.println("Necesitas un 5 o más para sacar la ficha verde");
+//                    }
+//                } else {
+//                    moverFichaVerde(ultimoValor);
+//                    String respuesta = JOptionPane.showInputDialog(this.banco.getPregunta());
+//                    boolean valida = this.banco.validarRespuesta(respuesta);
+//                    if (valida) sumarPuntaje(puntaje);
+//                    else restarPuntaje(puntaje);
+//                }
+//                break;
+//        }
+//    }
+//        switch(colorUno)
+//        { 
+//            private boolean ficha
+//            case "Rojo"://en caso de que elija rojo
+//            
+//                //moverFichaRoja(ultimoValor);
+//                moverFichaRoja(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
+//                String respuesta=JOptionPane.showInputDialog(this.banco.getPregunta());//se le muestra la pregunta a la persona y se guarda la respuesta en la variable respuesta. 
+//                this.banco.validarRespuesta(respuesta);//se le manda la respuesta al metodo que valida la respuesta
+//                if(banco.getRandomNumber()%2==0)
+//                {
+//                    if(this.banco.validarRespuesta(respuesta))
+//                    {
+//                        sumarPuntaje(puntaje);
+//                    }//fin if 3
+//                    else
+//                    {
+//                        restarPuntaje(puntaje);
+//                    }//fin else
+//                }//fin if 2
+//                
+//                    if(this.banco.validarRespuesta(respuesta)==false)
+//                    {
+//                        sumarPuntaje(puntaje);
+//                    }
+//                    else
+//                    {
+//                        restarPuntaje(puntaje);
+//                    }
+//            //fin if1
+//            break;
+//                
+//            case "Amarillo":
+//                //amarillo
+//                moverFichaAmarilla(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
+//                String respuestaAmarilla=JOptionPane.showInputDialog(this.banco.getPregunta());
+//                this.banco.validarRespuesta(respuestaAmarilla);
+//                
+//                //rojas
+//                
+//            break;
+//            case "Azul":
+//                //Blue 
+//                moverFichaAzul(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
+//                String respuestaAzul=JOptionPane.showInputDialog(this.banco.getPregunta());
+//                this.banco.validarRespuesta(respuestaAzul);
+//                    //verdes
+//                    
+//                break;
+//                
+//            case "Verde":
+//                    //green
+//                moverFichaVerde(ultimoValor);//metodo que mueve la ficha y recibe el ultimo valor del dado.
+//                String respuestaVerde=JOptionPane.showInputDialog(this.banco.getPregunta());
+//                this.banco.validarRespuesta(respuestaVerde);
+//                    //Blue 
+//                    
+//            break;
+//        }
+    public void sacarFicha(String color) {
+    switch(color) {
+        case "Rojo":
+            fichaRojaSalio = true;
+            posicionActualRoja = 0;
+            squares[posicionActualRoja] = new Square(positions[posicionActualRoja]);
+            squares[posicionActualRoja].setPiece(new Piece(positions[posicionActualRoja], new ImageIcon("./src/main/resources/imagenes/piecered.png")));
+            break;
+        case "Amarillo":
+            fichaAmarillaSalio = true;
+            posicionActualAmarillo = 0;
+            squares[posicionActualAmarillo] = new Square(positions[posicionActualAmarillo]);
+            squares[posicionActualAmarillo].setPiece(new Piece(positions[posicionActualAmarillo], new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));
+            break;
+        case "Azul":
+            fichaAzulSalio = true;
+            posicionActualAzul = 0;
+            squares[posicionActualAzul] = new Square(positions[posicionActualAzul]);
+            squares[posicionActualAzul].setPiece(new Piece(positions[posicionActualAzul], new ImageIcon("./src/main/resources/imagenes/pieceblue.png")));
+            break;
+        case "Verde":
+            fichaVerdeSalio = true;
+            posicionActualVerde = 0;
+            squares[posicionActualVerde] = new Square(positions[posicionActualVerde]);
+            squares[posicionActualVerde].setPiece(new Piece(positions[posicionActualVerde], new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));
+            break;
+    }
+}
     
     
     public void colocarFichasAmarillas()//metodo que pone las fichas en las casas iniciales.
@@ -571,7 +800,7 @@ public class Board {
     
     public void moverFichaAzul(int valorDado)//metodo que mueve la ficha azul
     {
-        posicionActualAzul=posicionActualRoja+valorDado;//se le asigna el valor del dado a la posicion para que esta avance.
+        posicionActualAzul=posicionActualAzul+valorDado;//se le asigna el valor del dado a la posicion para que esta avance.
         
         if(posicionActualAzul>=positions.length)//para que no se pase del array
         {
@@ -593,7 +822,7 @@ public class Board {
         }
         
         squares[posicionActualAmarillo]=new Square(positions[posicionActualAmarillo]);
-        squares[posicionActualAmarillo].setPiece(new Piece(positions[posicionActualAzul], new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//se dibuja la ficha
+        squares[posicionActualAmarillo].setPiece(new Piece(positions[posicionActualAmarillo], new ImageIcon("./src/main/resources/imagenes/pieceyellow.png")));//se dibuja la ficha
     }
     public void moverFichaVerde(int valorDado)
     {
@@ -601,14 +830,83 @@ public class Board {
         if(posicionActualVerde>positions.length)//para que no se pase del array
         {
 //            posicionActualAzul=positions.length;
-            posicionActualAzul=63;
+            posicionActualVerde=63;
         }
         squares[posicionActualVerde]=new Square(positions[posicionActualVerde]);
         squares[posicionActualVerde].setPiece(new Piece(positions[posicionActualVerde],new ImageIcon("./src/main/resources/imagenes/piecegreen.png")));//se dibuja la ficha
     }
-//    public void start()
-//    {
-//        quadrants();
-//    }
+    
+    public void sumarPuntaje(double puntaje)
+    {
+        puntaje++;
+    }
+    
+    public void restarPuntaje(double puntaje)
+    {
+        puntaje--;
+    }
+    
+
+
+// GETTERS Y SETTERS DE LAS BANDERAS
+    public boolean isFichaRojaEnCasa() {
+        return fichaRojaEnCasa;
+    }
+
+    public void setFichaRojaEnCasa(boolean fichaRojaEnCasa) {
+        this.fichaRojaEnCasa = fichaRojaEnCasa;
+    }   
+
+    public boolean isFichaAmarillaEnCasa() {
+        return fichaAmarillaEnCasa;
+    }
+
+    public void setFichaAmarillaEnCasa(boolean fichaAmarillaEnCasa) {
+        this.fichaAmarillaEnCasa = fichaAmarillaEnCasa;
+    }   
+
+    public boolean isFichaAzulEnCasa() {
+        return fichaAzulEnCasa;
+    }
+
+    public void setFichaAzulEnCasa(boolean fichaAzulEnCasa) {
+        this.fichaAzulEnCasa = fichaAzulEnCasa;
+    }
+
+    public boolean isFichaVerdeEnCasa() {
+        return fichaVerdeEnCasa;
+    }
+
+    public void setFichaVerdeEnCasa(boolean fichaVerdeEnCasa) {
+        this.fichaVerdeEnCasa = fichaVerdeEnCasa;
+    }
+
+    //(para cuando la ficha sale de casa)
+    public void setPosicionActualRoja(int posicion) {
+        this.posicionActualRoja = posicion;
+    }
+
+    public void setPosicionActualAmarillo(int posicion) {
+        this.posicionActualAmarillo = posicion;
+    }
+
+    public void setPosicionActualAzul(int posicion) {
+        this.posicionActualAzul = posicion;
+    }
+
+    public void setPosicionActualVerde(int posicion) {
+        this.posicionActualVerde = posicion;
+    }
+    public boolean isFichaRojaSalio() { 
+        return fichaRojaSalio; 
+    }
+    public boolean isFichaAmarillaSalio() { 
+        return fichaAmarillaSalio; 
+    }
+    public boolean isFichaAzulSalio() { 
+        return fichaAzulSalio; 
+    }
+    public boolean isFichaVerdeSalio() { 
+        return fichaVerdeSalio; 
+    }
 }
- 

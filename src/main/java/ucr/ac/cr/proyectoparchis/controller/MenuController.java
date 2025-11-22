@@ -7,6 +7,8 @@ package ucr.ac.cr.proyectoparchis.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import ucr.ac.cr.proyectoparchis.model.HiloCronometro;
+import ucr.ac.cr.proyectoparchis.view.GUICronometro;
 import ucr.ac.cr.proyectoparchis.view.PrincipalMenu;
 import ucr.ac.cr.proyectoparchis.view.VentanaCreditos;
 import ucr.ac.cr.proyectoparchis.view.VentanaDeHistoria;
@@ -18,6 +20,8 @@ import ucr.ac.cr.proyectoparchis.view.VentanaDeSeleccionDeColor;
  * @author jeanmarco
  */
 public class MenuController implements ActionListener{
+    private HiloCronometro hiloCronometro;
+    private GUICronometro guiCronometro;
     public PrincipalMenu menuPrincipal;
     private VentanaDeInstrucciones ventanaInstrucciones;
     private VentanaDeHistoria ventanaHistoria;
@@ -26,6 +30,8 @@ public class MenuController implements ActionListener{
     private GameController gameController;
     
     public MenuController() {
+        this.guiCronometro=new GUICronometro();
+        this.hiloCronometro=new HiloCronometro(guiCronometro);
         ventanaInstrucciones=new VentanaDeInstrucciones();
         ventanaHistoria=new VentanaDeHistoria();
         ventanaCreditos=new VentanaCreditos();
@@ -60,11 +66,15 @@ public class MenuController implements ActionListener{
                 gameController=new GameController(ventanaSeleccion, colorUno);//mandamos ventanaDeseleccion y colorUno
                 
                 gameController.crearJugadores(nombreJugador, nombreCPU);
+
                 gameController.guiGame.setVisible(true);//hacer visible el tablero de parchis
+                this.guiCronometro.setVisible(true);
+                this.hiloCronometro.start();
             break;
             
             case "Jugar":
                 ventanaSeleccion.setVisible(true);//del menu principal a la ventana de seleccion de color, asi asegurandome que elija bien el color
+                
 //                gameController.guiGame.setVisible(true);
                 //boton para Jugar
             break;

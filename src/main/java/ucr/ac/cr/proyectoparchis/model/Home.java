@@ -22,7 +22,7 @@ public class Home {
     public void setPiece(int index, Piece piece)
     {
         this.piece[index]=piece;
-    }
+        }
     
     public Piece getPiece(int index)//Recibe de la clase board y asigna las posiciones que al final se asigna en el arreglo.
     {

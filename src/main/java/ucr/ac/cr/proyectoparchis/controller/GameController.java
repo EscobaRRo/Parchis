@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import ucr.ac.cr.proyectoparchis.model.Dado;
 import ucr.ac.cr.proyectoparchis.model.Board;
+import ucr.ac.cr.proyectoparchis.model.CpuGestion;
 import ucr.ac.cr.proyectoparchis.model.GameArea;
 import ucr.ac.cr.proyectoparchis.model.GestionTurnos;
 import ucr.ac.cr.proyectoparchis.model.Jugador;
@@ -28,6 +29,7 @@ import ucr.ac.cr.proyectoparchis.view.VentanaDeSeleccionDeColor;
 public class GameController implements ActionListener, MouseListener{
     private Board board;
     private Piece piece;
+    private boolean verificar=true;
     public GUIGame guiGame;
     private GameArea gameArea;
     private ControlPanel controlPanel;
@@ -36,12 +38,14 @@ public class GameController implements ActionListener, MouseListener{
     private GestionTurnos gestionTurnos;
     private VentanaDeSeleccionDeColor seleccionColor;
     private String colorJugador;
+    private double puntaje=5;
+    private CpuGestion gestionCpu;
     
     
     public GameController(VentanaDeSeleccionDeColor seleccionColor,String colorUno)//recibe por parametros la ventana seleccion de color, porque los datos de nombres y colores se encuentran en la ventanaDeSeleccion del otro controlador
     {
         this.seleccionColor=seleccionColor;//se le asigna a la variable de esta clase la ventana de la clase del GameController porque si se crea una nueva, no se guardan los datos ingresados
-        this.gameArea=new GameArea(colorUno);
+        this.gameArea=new GameArea(colorUno, puntaje);
         this.dado=new Dado();
         this.colorJugador=colorUno;
 //        this.controlPanel=new ControlPanel();
@@ -49,6 +53,7 @@ public class GameController implements ActionListener, MouseListener{
         this.gestionTurnos=new GestionTurnos();
         this.guiGame=new GUIGame(this);
         this.board= this.gameArea.getBoard();
+        this.gestionCpu=new CpuGestion(board, dado, obtenerColorCpu(colorUno), this);
         //this.guiGame.setVisible(true); no se visibiliza de una sola vez, ya que en el botón de jugar del primer menú se mostraría.
         //piece= new Piece(new Position(400, 400), new ImageIcon("./src/main/resources/imagenes/"))
     }
@@ -58,19 +63,80 @@ public class GameController implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand())
         {
-            case "dado":
-                System.out.println("Dado");//Muestra un mensaje de dado
-                Jugador actual=gestionTurnos.getJugadorActual();//esta variable tiene la posicion del jugador que esta siendo usado en el array
-                int valor=dado.getRandomNumber();//se le asigna a una variable el valor del dado.
-                board.setValorFicha(valor);//se le manda el valor que obtuvo el dado
-                board.fichas(colorJugador);//se le manda al metodo fichas el color del jugador ?
-                guiGame.repaint();//repaint
-                System.out.println(actual.getNombre()+"tiró el dado: "+valor);//Se muestra el que hizo el turno y el valor del dado
-                actual.realizarJugada();
-                    //se realiza la jugada
-                gestionTurnos.pasarTurno();// metodo que hace que se pase el turno a la siguiente persona
-                System.out.println("Siguiente turno" +gestionTurnos.getJugadorActual().getNombre());//se muestra el siguiente jugador
-            break;
+            
+                
+               case "dado":
+            Jugador actual = gestionTurnos.getJugadorActual(); // jugador actual
+            int valor = dado.getRandomNumber(); // valor del dado
+            board.setValorFicha(valor); // asignar valor al board
+            System.out.println(actual.getNombre() + " tiró el dado: " + valor);
+
+            // Dependiendo del color del jugador, intentamos sacar o mover la ficha
+            switch(colorJugador) {
+                case "Rojo":
+                    if (!board.isFichaRojaSalio()) { // si no ha salido
+                        if (valor >= 5) {
+                            board.sacarFicha("Rojo");
+                            System.out.println("Ficha roja salió al tablero");
+                        } else {
+                            System.out.println("Necesitas 5 o más para sacar la ficha roja");
+                        }
+                    } else { // ya salió, mover y preguntar
+                        board.fichas("Rojo", puntaje);
+                    }
+                    break;
+
+                case "Amarillo":
+                    if (!board.isFichaAmarillaSalio()) {
+                        if (valor >= 5) {
+                            board.sacarFicha("Amarillo");
+                            System.out.println("Ficha amarilla salió al tablero");
+                        } else {
+                            System.out.println("Necesitas 5 o más para sacar la ficha amarilla");
+                        }
+                    } else {
+                        board.fichas("Amarillo", puntaje);
+                    }
+                    break;
+
+                case "Azul":
+                    if (!board.isFichaAzulSalio()) {
+                        if (valor >= 5) {
+                            board.sacarFicha("Azul");
+                            System.out.println("Ficha azul salió al tablero");
+                        } else {
+                            System.out.println("Necesitas 5 o más para sacar la ficha azul");
+                        }
+                    } else {
+                        board.fichas("Azul", puntaje);
+                    }
+                    break;
+
+                case "Verde":
+                    if (!board.isFichaVerdeSalio()) {
+                        if (valor >= 5) {
+                            board.sacarFicha("Verde");
+                            System.out.println("Ficha verde salió al tablero");
+                        } else {
+                            System.out.println("Necesitas 5 o más para sacar la ficha verde");
+                        }
+                    } else {
+                        board.fichas("Verde", puntaje);
+                    }
+                    break;
+            }
+
+            guiGame.repaint(); // actualizar tablero
+            actual.realizarJugada(); // marcar jugada
+            gestionTurnos.pasarTurno(); // pasar turno
+            
+            if(gestionTurnos.getJugadorActual().getNombre().equals("CPU"))
+            {
+                gestionCpu.jugarTurnoCpu();
+            }
+            System.out.println("Siguiente turno: " + gestionTurnos.getJugadorActual().getNombre());
+
+        break;
             case "jugador1":
                 System.out.println("Jugador Uno");
             break;
@@ -134,9 +200,37 @@ public class GameController implements ActionListener, MouseListener{
         this.boardPanel=panel;
     }
     
+    public GestionTurnos getGestionTurnos()
+    {
+        return gestionTurnos;
+    }
     public Dado getDado()
     {
         return this.dado;
     }
     
+    public String obtenerColorCpu(String colorJugador)
+    {
+        String colorCpu="";
+        switch(colorJugador)
+        {
+            case "Rojo":
+                    colorCpu="Amarillo";
+                break;
+              
+                
+            case "Amarillo":
+                    colorCpu= "Rojo";
+                break;
+            
+            case "Azul":
+                    colorCpu="Verde";
+                break;
+            
+            case "Verde":
+                    colorCpu="Azul";
+                break;
+        }
+        return colorCpu;
+    }
 }

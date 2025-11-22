@@ -18,21 +18,21 @@ public class BancoDePreguntas {
     
     public void llenarArray()
     {
-        bancoDePreguntasFacil[0]="Los frenos sirven para detener el auto";//si
-        bancoDePreguntasFacil[1]="El motor de un auto funciona solo con agua.";//no
-        bancoDePreguntasFacil[2]="El cinturón de seguridad protege al conductor en caso de accidente.";//si
-        bancoDePreguntasFacil[3]="Las luces delanteras se llaman faros.";//si
-        bancoDePreguntasFacil[4]="La rueda de repuesto se llama llanta de emergencia";//si
-        bancoDePreguntasFacil[5]="Un auto puede andar sin combustible";//no
-        bancoDePreguntasFacil[6]="El tacómetro indica la velocidad del auto.";//no
-        bancoDePreguntasFacil[7]="Los neumáticos muy desinflados pueden provocar accidentes.";//si
-        bancoDePreguntasFacil[8]="Las llaves sirve para encender el motor.";//si
-        bancoDePreguntasFacil[9]="El volante se usa para controlar los limpiaparabrisas";//no
+        //pares son si, impares no
+        bancoDePreguntasFacil[0]="Los frenos sirven para detener el auto\nResponda con true o false";//si
+        bancoDePreguntasFacil[1]="El motor de un auto funciona solo con agua.\nResponda con true o false";//no
+        bancoDePreguntasFacil[2]="El cinturón de seguridad protege al conductor en caso de accidente.\nResponda con true o false";//si
+        bancoDePreguntasFacil[3]="Un auto puede andar sin combustible\nResponda con true o false";//no
+        bancoDePreguntasFacil[4]="La rueda de repuesto se llama llanta de emergencia\nResponda con true o false";//si
+        bancoDePreguntasFacil[6]="El volante se usa para controlar los limpiaparabrisas\nResponda con true o false";//no
+        bancoDePreguntasFacil[7]="Los neumáticos muy desinflados pueden provocar accidentes.\nResponda con true o false";//si
+        bancoDePreguntasFacil[8]="Las direccionales sirven para encender el motor.\nResponda con true o false";//no
+        bancoDePreguntasFacil[9]="El tacómetro indica la velocidad del auto.\nResponda con true o false";//si
     }
     
     public int getRandomNumber()
     {
-        return (int)(Math.random()*(15-1+1))+1;
+        return (int)(Math.random()*(9-0+1))+0;
     }
     
     public String getPregunta()//metodo para obtener preguntas
@@ -45,7 +45,18 @@ public class BancoDePreguntas {
     
     public boolean validarRespuesta(String respuesta)//metodo para validar respuesta
     {
-        if(respuesta.equalsIgnoreCase("Falso"))
+        if(getRandomNumber()%2==0)//si el numero que recibe es par, hace una forma de validar la respuesta. Aqui las respuestas tienen que ser true
+        {
+            if(respuesta.toLowerCase().equalsIgnoreCase("true"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }//fin if de las respuestas pares
+        if(respuesta.toLowerCase().equalsIgnoreCase("false"))//las respuestas de los números impares son no, por lo tanto se la respuesta correcta es falso
         {
             return false;
         }

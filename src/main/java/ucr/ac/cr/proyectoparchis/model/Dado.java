@@ -44,4 +44,9 @@ public class Dado {
         }
     }
     
+    public int getExitNumber()
+    {
+        int numSalida=(int)(Math.random()*(6-1+1))+1;
+        return numSalida;
+    }
 }
